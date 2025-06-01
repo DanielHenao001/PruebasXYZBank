@@ -102,4 +102,9 @@ public class GlobalBankSteps {
     public void validarTransacciones() {
         actor.should(seeThat(ElementoVisible.en(TABLA_TRANSACCIONES)));
     }
+    @And("Ingresa el monto de retiro \"{string}\"")
+    public void ingresarMontoRetiro(String monto) {
+        actor.attemptsTo(Enter.theValue(monto).into(INPUT_WITHDRAWL));
+    }
+
 }

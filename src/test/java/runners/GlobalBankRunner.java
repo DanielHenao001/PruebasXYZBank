@@ -6,9 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features/GlobalBank.feature",
-        glue = "stepsDefinitions",
-        snippets = CucumberOptions.SnippetType.CAMELCASE
+        features = "src/test/resources/features",
+        glue = {"stepsDefinitions"},
+        snippets = CucumberOptions.SnippetType.CAMELCASE,
+        plugin = {"pretty"}
 )
 public class GlobalBankRunner {
 }

@@ -20,7 +20,7 @@ Feature: Funcionalidades del banco en línea GlobalSQA
   Scenario: Retirar dinero exitosamente
     Given El usuario inicia sesión como "Harry Potter"
     When Va a la pestaña Withdrawl
-    And Ingresa el monto "100"
+    And Ingresa el monto de retiro "100"
     And Confirma el retiro
     Then Debería ver el mensaje "Transaction successful"
 
@@ -28,3 +28,4 @@ Feature: Funcionalidades del banco en línea GlobalSQA
     Given El usuario inicia sesión como "Harry Potter"
     When Accede a la pestaña Transactions
     Then Debería ver una tabla con transacciones
+

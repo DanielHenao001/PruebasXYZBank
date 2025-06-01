@@ -1,24 +1,39 @@
 plugins {
     java
-    id("io.github.serenity-bdd.serenity-gradle-plugin") version "3.6.12"
+    id("net.serenity-bdd.serenity-gradle-plugin") version "3.9.8"
 }
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    maven {
-        url = uri("https://plugins.gradle.org/m2/")
-    }
 }
 
 dependencies {
-    testImplementation("net.serenity-bdd:serenity-junit:3.6.12")
-    testImplementation("net.serenity-bdd:serenity-cucumber6:3.6.12") // o serenity-cucumber8 si usas Cucumber 8+
-    testImplementation("io.cucumber:cucumber-junit:6.11.0")
-    testImplementation("junit:junit:4.13.2")
-}
+    // Dependencias principales (disponibles para main y test)
+    implementation("net.serenity-bdd:serenity-core:3.9.8")
+    implementation("net.serenity-bdd:serenity-junit5:3.9.8")
+    implementation("net.serenity-bdd:serenity-cucumber:3.9.8")
+    implementation("net.serenity-bdd:serenity-screenplay:3.9.8")
+    implementation("net.serenity-bdd:serenity-screenplay-webdriver:3.9.8")
+    implementation("net.serenity-bdd:serenity-ensure:3.9.8")
 
+    // Dependencias específicas de test
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("io.cucumber:cucumber-java:7.14.0")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.14.0")
+    testImplementation("org.slf4j:slf4j-simple:2.0.7")
+}
 
 tasks.test {
     useJUnitPlatform()
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+    include("**/*Runner.class")
+}
+
+serenity {
+    reports = listOf("pretty", "html")
+    testRoot = "runners"
 }
